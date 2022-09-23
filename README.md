@@ -1,29 +1,21 @@
 <!-- BEGIN_TF_DOCS -->
-# Terraform Intersight Pools - WWNN or WWPN
-Manages Intersight WWNN or WWPN Pools
+# Terraform Intersight Policies - Virtual KVM
+Manages Intersight Virtual KVM Policies
 
 Location in GUI:
-`Pools` » `Create Pool` » `WWNN or WWPN`
+`Policies` » `Create Policy` » `Virtual KVM`
 
 ## Example
 
 ### main.tf
 ```hcl
-module "wwpn_pool" {
-  source  = "scotttyso/pools-fc/intersight"
+module "vkvm_policy" {
+  source  = "terraform-cisco-modules/policies-virtual-kvm/intersight"
   version = ">= 1.0.1"
 
-  assignment_order = "sequential"
-  description      = "Demo WWPN Pool"
-  id_blocks = [
-    {
-      from = "0:00:00:25:B5:00:00:00"
-      size = 1000
-    }
-  ]
+  description  = "default Virtual KVM Policy."
   name         = "default"
   organization = "default"
-  pool_purpose = "WWPN"
 }
 
 ```
@@ -82,7 +74,7 @@ export TF_VAR_secretkey=`cat <secret-key-file-location>`
 Windows
 ```bash
 $env:TF_VAR_apikey="<your-api-key>"
-$env:TF_VAR_secretkey=`cat <secret-key-file-location>`
+$env:TF_VAR_secretkey="<secret-key-file-location>""
 ```
 
 
@@ -103,22 +95,27 @@ $env:TF_VAR_secretkey=`cat <secret-key-file-location>`
 | <a name="input_apikey"></a> [apikey](#input\_apikey) | Intersight API Key. | `string` | n/a | yes |
 | <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | Intersight URL. | `string` | `"https://intersight.com"` | no |
 | <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Intersight Secret Key. | `string` | n/a | yes |
-| <a name="input_assignment_order"></a> [assignment\_order](#input\_assignment\_order) | Assignment order decides the order in which the next identifier is allocated.<br>  * sequential - Identifiers are assigned in a sequential order.<br>  * default - Assignment order is decided by the system. | `string` | `"default"` | no |
-| <a name="input_description"></a> [description](#input\_description) | Description for the Fiber-Channel Pool. | `string` | `""` | no |
-| <a name="input_id_blocks"></a> [id\_blocks](#input\_id\_blocks) | List of WWxN's Configuration Parameters to Assign to the Fiber-Channel Pool.<br>  * from - Staring WWxN Address.  An Example is "20:00:00:25:B5:00:00:00".<br>  * size - Size of WWxN Pool.  An Example is 1000.<br>  * to - Ending WWxN Address.  An Example is "20:00:00:25:B5:00:03:E7".<br>  * IMPORTANT NOTE: You can only Specify `size` or `to` on initial creation.  This is a limitation of the API. | <pre>list(object(<br>    {<br>      from = string<br>      size = optional(number)<br>      to   = optional(string)<br>    }<br>  ))</pre> | `[]` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name for the Fiber-Channel Pool. | `string` | `"default"` | no |
+| <a name="input_description"></a> [description](#input\_description) | Description for the Policy. | `string` | `""` | no |
+| <a name="input_enable_local_server_video"></a> [enable\_local\_server\_video](#input\_enable\_local\_server\_video) | If enabled, displays KVM session on any monitor attached to the server. | `bool` | `true` | no |
+| <a name="input_enable_video_encryption"></a> [enable\_video\_encryption](#input\_enable\_video\_encryption) | If enabled, encrypts all video information sent through KVM. | `bool` | `true` | no |
+| <a name="input_enable_virtual_kvm"></a> [enable\_virtual\_kvm](#input\_enable\_virtual\_kvm) | Flag to Enable or Disable the Policy. | `bool` | `true` | no |
+| <a name="input_maximum_sessions"></a> [maximum\_sessions](#input\_maximum\_sessions) | The maximum number of concurrent KVM sessions allowed. Range is 1 to 4. | `number` | `4` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name for the Policy. | `string` | `"default"` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | Intersight Organization Name to Apply Policy to.  https://intersight.com/an/settings/organizations/. | `string` | `"default"` | no |
-| <a name="input_pool_purpose"></a> [pool\_purpose](#input\_pool\_purpose) | What type of Fiber-Channel Pool is this.  Options are:<br>  * WWNN<br>  * WWPN | `string` | `"WWPN"` | no |
+| <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>  * name - Name of the Profile to Assign.<br>  * object\_type - Object Type to Assign in the Profile Configuration.<br>    - server.Profile - For UCS Server Profiles.<br>    - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      moid        = string<br>      object_type = optional(string)<br>    }<br>  ))</pre> | `[]` | no |
+| <a name="input_remote_port"></a> [remote\_port](#input\_remote\_port) | The port used for KVM communication. Range is 1 to 65535. | `number` | `2068` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | List of Tag Attributes to Assign to the Policy. | `list(map(string))` | `[]` | no |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_moid"></a> [moid](#output\_moid) | WWxN Pool Managed Object ID (moid). |
+| <a name="output_moid"></a> [moid](#output\_moid) | Virtual KVM Policy Managed Object ID (moid). |
 ## Resources
 
 | Name | Type |
 |------|------|
-| [intersight_fcpool_pool.fc_pool](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/fcpool_pool) | resource |
+| [intersight_kvm_policy.virtual_kvm](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/resources/kvm_policy) | resource |
 | [intersight_organization_organization.org_moid](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/organization_organization) | data source |
+| [intersight_server_profile.profiles](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/server_profile) | data source |
+| [intersight_server_profile_template.templates](https://registry.terraform.io/providers/CiscoDevNet/intersight/latest/docs/data-sources/server_profile_template) | data source |
 <!-- END_TF_DOCS -->
