@@ -1,7 +1,3 @@
-terraform {
-  experiments = [module_variable_optional_attrs]
-}
-
 #____________________________________________________________
 #
 # Virtual KVM Policy Variables Section.
@@ -61,7 +57,7 @@ variable "profiles" {
   type = list(object(
     {
       moid        = string
-      object_type = optional(string)
+      object_type = optional(string, "server.Profile")
     }
   ))
 }

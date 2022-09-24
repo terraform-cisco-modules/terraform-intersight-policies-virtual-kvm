@@ -81,6 +81,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>""
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.3.0 |
 | <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.32 |
 ## Providers
 
@@ -101,7 +102,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>""
 | <a name="input_maximum_sessions"></a> [maximum\_sessions](#input\_maximum\_sessions) | The maximum number of concurrent KVM sessions allowed. Range is 1 to 4. | `number` | `4` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name for the Policy. | `string` | `"default"` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | Intersight Organization Name to Apply Policy to.  https://intersight.com/an/settings/organizations/. | `string` | `"default"` | no |
-| <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>  * name - Name of the Profile to Assign.<br>  * object\_type - Object Type to Assign in the Profile Configuration.<br>    - server.Profile - For UCS Server Profiles.<br>    - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      moid        = string<br>      object_type = optional(string)<br>    }<br>  ))</pre> | `[]` | no |
+| <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>  * name - Name of the Profile to Assign.<br>  * object\_type - Object Type to Assign in the Profile Configuration.<br>    - server.Profile - For UCS Server Profiles.<br>    - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      moid        = string<br>      object_type = optional(string, "server.Profile")<br>    }<br>  ))</pre> | `[]` | no |
 | <a name="input_remote_port"></a> [remote\_port](#input\_remote\_port) | The port used for KVM communication. Range is 1 to 65535. | `number` | `2068` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | List of Tag Attributes to Assign to the Policy. | `list(map(string))` | `[]` | no |
 ## Outputs

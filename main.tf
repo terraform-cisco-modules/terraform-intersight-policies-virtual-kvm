@@ -36,15 +36,6 @@ data "intersight_server_profile_template" "templates" {
 # GUI Location: Policies > Create Policy > Virtual KVM
 #__________________________________________________________________
 
-locals {
-  profiles = {
-    for v in var.profiles : v.name => {
-      name        = v.name
-      object_type = v.object_type != null ? v.object_type : "server.Profile"
-    }
-  }
-}
-
 resource "intersight_kvm_policy" "virtual_kvm" {
   depends_on = [
     data.intersight_server_profile.profiles,
