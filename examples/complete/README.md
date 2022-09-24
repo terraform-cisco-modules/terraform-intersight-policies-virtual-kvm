@@ -21,7 +21,6 @@ module "vkvm_policy" {
   name         = "default"
   organization = "default"
 }
-
 ```
 
 ### variables.tf
