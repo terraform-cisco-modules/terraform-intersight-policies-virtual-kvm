@@ -1,4 +1,4 @@
-module "vkvm_policy" {
+module "virtual_kvm" {
   source  = "terraform-cisco-modules/policies-virtual-kvm/intersight"
   version = ">= 1.0.1"
 
