@@ -53,6 +53,7 @@ resource "intersight_kvm_policy" "virtual_kvm" {
   maximum_sessions          = var.maximum_sessions
   name                      = var.name
   remote_port               = var.remote_port
+  tunneled_kvm_enabled      = var.allow_tunneled_vkvm
   organization {
     moid = length(
       regexall("[[:xdigit:]]{24}", var.organization)

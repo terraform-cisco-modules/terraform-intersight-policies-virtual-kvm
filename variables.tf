@@ -3,6 +3,12 @@
 # Virtual KVM Policy Variables Section.
 #____________________________________________________________
 
+variable "allow_tunneled_vkvm" {
+  default     = false
+  description = "Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM."
+  type        = bool
+}
+
 variable "description" {
   default     = ""
   description = "Description for the Policy."

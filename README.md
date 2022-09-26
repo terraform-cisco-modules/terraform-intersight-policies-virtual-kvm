@@ -96,6 +96,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>""
 | <a name="input_apikey"></a> [apikey](#input\_apikey) | Intersight API Key. | `string` | n/a | yes |
 | <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | Intersight URL. | `string` | `"https://intersight.com"` | no |
 | <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Intersight Secret Key. | `string` | n/a | yes |
+| <a name="input_allow_tunneled_vkvm"></a> [allow\_tunneled\_vkvm](#input\_allow\_tunneled\_vkvm) | Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description for the Policy. | `string` | `""` | no |
 | <a name="input_enable_local_server_video"></a> [enable\_local\_server\_video](#input\_enable\_local\_server\_video) | If enabled, displays KVM session on any monitor attached to the server. | `bool` | `true` | no |
 | <a name="input_enable_video_encryption"></a> [enable\_video\_encryption](#input\_enable\_video\_encryption) | If enabled, encrypts all video information sent through KVM. | `bool` | `true` | no |
