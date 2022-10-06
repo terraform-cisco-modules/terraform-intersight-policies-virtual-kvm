@@ -1,9 +1,14 @@
 <!-- BEGIN_TF_DOCS -->
+[![Tests](https://github.com/terraform-cisco-modules/terraform-intersight-policies-virtual-kvm/actions/workflows/terratest.yml/badge.svg)](https://github.com/terraform-cisco-modules/terraform-intersight-policies-virtual-kvm/actions/workflows/terratest.yml)
 # Terraform Intersight Policies - Virtual KVM
 Manages Intersight Virtual KVM Policies
 
 Location in GUI:
 `Policies` » `Create Policy` » `Virtual KVM`
+
+## Easy IMM
+
+[*Easy IMM - Comprehensive Example*](https://github.com/terraform-cisco-modules/easy-imm-comprehensive-example) - A comprehensive example for policies, pools, and profiles.
 
 ## Example
 
@@ -13,9 +18,15 @@ module "virtual_kvm" {
   source  = "terraform-cisco-modules/policies-virtual-kvm/intersight"
   version = ">= 1.0.1"
 
-  description  = "default Virtual KVM Policy."
-  name         = "default"
-  organization = "default"
+  allow_tunneled_vkvm       = false
+  description               = "default Virtual KVM Policy."
+  enable_local_server_video = true
+  enable_video_encryption   = true
+  enable_virtual_kvm        = true
+  maximum_sessions          = true
+  name                      = "default"
+  organization              = "default"
+  remote_port               = true
 }
 ```
 

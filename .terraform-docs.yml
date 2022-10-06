@@ -3,12 +3,17 @@ version: '>= 0.14.0'
 formatter: markdown table
 
 content: |-
+  [![Tests](https://github.com/terraform-cisco-modules/terraform-intersight-policies-virtual-kvm/actions/workflows/terratest.yml/badge.svg)](https://github.com/terraform-cisco-modules/terraform-intersight-policies-virtual-kvm/actions/workflows/terratest.yml)
   # Terraform Intersight Policies - Virtual KVM
   Manages Intersight Virtual KVM Policies
   
   Location in GUI:
   `Policies` » `Create Policy` » `Virtual KVM`
   
+  ## Easy IMM
+
+  [*Easy IMM - Comprehensive Example*](https://github.com/terraform-cisco-modules/easy-imm-comprehensive-example) - A comprehensive example for policies, pools, and profiles.
+
   ## Example
 
   ### main.tf

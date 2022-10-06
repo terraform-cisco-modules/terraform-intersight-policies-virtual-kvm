@@ -17,9 +17,15 @@ module "virtual_kvm" {
   source  = "terraform-cisco-modules/policies-virtual-kvm/intersight"
   version = ">= 1.0.1"
 
-  description  = "default Virtual KVM Policy."
-  name         = "default"
-  organization = "default"
+  allow_tunneled_vkvm       = false
+  description               = "default Virtual KVM Policy."
+  enable_local_server_video = true
+  enable_video_encryption   = true
+  enable_virtual_kvm        = true
+  maximum_sessions          = true
+  name                      = "default"
+  organization              = "default"
+  remote_port               = true
 }
 ```
 
