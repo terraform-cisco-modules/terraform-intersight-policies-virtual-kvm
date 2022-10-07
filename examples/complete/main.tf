@@ -7,8 +7,8 @@ module "virtual_kvm" {
   enable_local_server_video = true
   enable_video_encryption   = true
   enable_virtual_kvm        = true
-  maximum_sessions          = true
+  maximum_sessions          = 4
   name                      = "default"
   organization              = "default"
-  remote_port               = true
+  remote_port               = 2068
 }
